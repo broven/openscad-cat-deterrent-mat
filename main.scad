@@ -6,7 +6,7 @@ width_cm = 10;
 // 垫子的长度（厘米）
 height_cm = 10;
 // 垫子底板的层数
-depth_layer = 1;
+depth_layer = 2;
 
 /* [尖刺参数] */
 // 尖刺壁厚
@@ -91,36 +91,12 @@ module spike() {
 // 实心尖刺（用于创建中空效果）
 module spike_solid() {
     // 使用较小的 $fn 值以减少 CSG 复杂度
-    _fn = 12;
-    if (spike_rounding_mm > 0) {
-        // 带圆角的尖刺
-        hull() {
-            translate([0, 0, 0]) {
-                cylinder(h = spike_rounding_mm, 
-                        d1 = spike_base_diameter_mm, 
-                        d2 = spike_base_diameter_mm - spike_rounding_mm * 0.5,
-                        $fn = _fn);
-            }
-            translate([0, 0, spike_height_mm - spike_rounding_mm]) {
-                cylinder(h = spike_rounding_mm, 
-                        d1 = spike_top_diameter_mm + spike_rounding_mm * 0.5, 
-                        d2 = spike_top_diameter_mm,
-                        $fn = _fn);
-            }
-            translate([0, 0, spike_rounding_mm]) {
-                cylinder(h = spike_height_mm - 2 * spike_rounding_mm, 
-                        d1 = spike_base_diameter_mm - spike_rounding_mm * 0.5, 
-                        d2 = spike_top_diameter_mm + spike_rounding_mm * 0.5,
-                        $fn = _fn);
-            }
-        }
-    } else {
-        // 尖锐的尖刺
-        cylinder(h = spike_height_mm, 
-                d1 = spike_base_diameter_mm, 
-                d2 = spike_top_diameter_mm,
-                $fn = _fn);
-    }
+    _fn = 8;
+    // 简单的尖锐尖刺（已去除圆角优化）
+    cylinder(h = spike_height_mm, 
+            d1 = spike_base_diameter_mm, 
+            d2 = spike_top_diameter_mm,
+            $fn = _fn);
 }
 
 // 内部空心部分（用于减去）
@@ -136,34 +112,10 @@ module spike_hollow() {
     _spike_hollow_height = spike_height_mm - _top_closed_thickness;
     
     // 使用较小的 $fn 值以减少 CSG 复杂度
-    _fn = 12;
+    _fn = 8;
     
-    // 只计算尖刺部分的空心高度（不包括底板，底板单独处理）
-    if (spike_rounding_mm > 0 && _inner_base_diameter > 0.1 && _inner_top_diameter > 0.1 && _spike_hollow_height > spike_rounding_mm * 2) {
-        // 带圆角的内部空心
-        hull() {
-            translate([0, 0, 0]) {
-                cylinder(h = spike_rounding_mm, 
-                        d1 = _inner_base_diameter, 
-                        d2 = _inner_base_diameter - spike_rounding_mm * 0.5,
-                        $fn = _fn);
-            }
-            // 顶部位置：在尖刺高度减去封闭层和圆角
-            translate([0, 0, _spike_hollow_height - spike_rounding_mm]) {
-                cylinder(h = spike_rounding_mm, 
-                        d1 = _inner_top_diameter + spike_rounding_mm * 0.5, 
-                        d2 = _inner_top_diameter,
-                        $fn = _fn);
-            }
-            translate([0, 0, spike_rounding_mm]) {
-                cylinder(h = _spike_hollow_height - 2 * spike_rounding_mm, 
-                        d1 = _inner_base_diameter - spike_rounding_mm * 0.5, 
-                        d2 = _inner_top_diameter + spike_rounding_mm * 0.5,
-                        $fn = _fn);
-            }
-        }
-    } else if (_spike_hollow_height > 0) {
-        // 简单的内部空心（限制高度，顶部留出封闭层）
+    // 简单的内部空心（限制高度，顶部留出封闭层，已去除圆角优化）
+    if (_spike_hollow_height > 0) {
         cylinder(h = _spike_hollow_height, 
                 d1 = _inner_base_diameter, 
                 d2 = _inner_top_diameter,
@@ -190,8 +142,8 @@ module base_plate_hole() {
     // 计算内部底部直径（用于通孔）
     _inner_base_diameter = max(0.1, spike_base_diameter_mm - 2 * _spike_wall_thickness_mm);
     
-    // 使用较小的 $fn 值以减少 CSG 复杂度
-    _fn = 12;
+    // 使用较小的 $fn 值以减少 CSG 复杂度（统一为 8）
+    _fn = 8;
     
     // 在底板上打一个圆柱孔，确保完全穿透
     cylinder(h = _depth_mm + 0.2, 
