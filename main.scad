@@ -1,3 +1,4 @@
+// https://github.com/broven/openscad-cat-deterrent-mat
 /* [主要参数] */
 layer_height_mm = 0.2;
 layer_thickness_mm = 0.42;
