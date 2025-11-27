@@ -1,0 +1,26 @@
+{
+  // OpenSCAD 相关设置
+  "files.associations": {
+    "*.scad": "openscad"
+  },
+  
+  // OpenSCAD Language Support 扩展设置
+  "openscad.preview.autoRefresh": true,
+  "openscad.preview.autoRefreshDelay": 500,
+  "openscad.preview.showWireframe": false,
+  "openscad.preview.showAxes": true,
+  "openscad.preview.showEdges": true,
+  
+  // OpenSCAD 可执行文件路径（macOS 默认路径，如果通过 Homebrew 安装）
+  // 如果安装在其他位置，请修改此路径
+  "openscad.executable": "/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD",
+  
+  // 编辑器设置
+  "editor.formatOnSave": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  
+  // 文件编码
+  "files.encoding": "utf8"
+}
+

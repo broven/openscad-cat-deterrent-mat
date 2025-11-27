@@ -1,0 +1,25 @@
+# OpenSCAD 生成的文件
+*.stl
+*.off
+*.amf
+*.3mf
+*.dxf
+*.csg
+*.echo
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# 临时文件
+*.tmp
+*.bak
+*~
+
