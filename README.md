@@ -1,4 +1,6 @@
 # OpenSCAD Cat Deterrent Mat
+ ![A1_full_plate](assets/real.jpg)
+
 - 任意生成大小
 - 顶部尖刺削平，大小可调整，避免猫咪/狗狗受伤
 - 打印优化，尖刺中空，底层薄，加快打印速度
