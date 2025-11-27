@@ -17,11 +17,11 @@ spike_wall_layer = 2;
 // 尖刺的高度（毫米）
 spike_height_mm = 7;
 // 尖刺的间距（毫米）
-spike_spacing_mm = 10;
+spike_spacing_mm = 15;
 // 尖刺底部直径（毫米）
-spike_base_diameter_mm = 7;
+spike_base_diameter_mm = 10;
 // 尖刺顶部直径（毫米）
-spike_top_diameter_mm = 0.5;
+spike_top_diameter_mm = 2;
 // 尖刺的圆角半径（毫米，0 表示尖锐）
 spike_rounding_mm = 0.1;
 

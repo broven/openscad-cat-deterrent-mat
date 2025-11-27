@@ -1,5 +1,4 @@
 # OpenSCAD 生成的文件
-*.stl
 *.off
 *.amf
 *.3mf
